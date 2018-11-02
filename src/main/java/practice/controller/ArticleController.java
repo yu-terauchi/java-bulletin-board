@@ -28,6 +28,7 @@ public class ArticleController {
 
 	@Autowired
 	private ArticleRepository articleRepository;
+	
 	@Autowired
 	private CommentRepository commentRepository;
 	
@@ -97,12 +98,13 @@ public class ArticleController {
 	/**
 	 * 投稿された記事および記事に付随するコメントを削除するメソッド.
 	 * 
-	 * @return 投稿された記事および記事に付随するコメントを削除した後の掲示板画面
 	 */
 	@RequestMapping("/deleteArticle")
-	public void deleteArticle(Integer id) {
-		articleRepository.deleteById(id);
-		commentRepository.deleteById(id);
+	public String deleteArticle(Integer articleId) {
+		System.out.println("掲示板の記事を削除します");
+		commentRepository.deleteByArticleId(articleId);
+		articleRepository.deleteById(articleId);
+		return "redirect:/article/index";
 	}
 
 }

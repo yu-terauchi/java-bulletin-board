@@ -34,6 +34,7 @@
 	 	<p>記事内容:
 	 	<c:out value="${article.content}"></c:out></p>
 	 	
+<!-- 	削除フォーム	 -->
 	 	<form action="${pageContext.request.contextPath}/article/deleteArticle" method="POST">
 	 			<input type="hidden" name="articleId" value="${article.id}">
 	 		<input type="submit" value="投稿を削除">

@@ -1,7 +1,7 @@
 package practice.domain;
 
 /**
- * コメントを表すドメイン.
+ * 記事毎のコメントを表すドメイン.
  * 
  * @author yu.terauchi
  *

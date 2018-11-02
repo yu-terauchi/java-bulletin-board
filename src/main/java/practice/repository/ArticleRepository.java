@@ -61,6 +61,7 @@ public class ArticleRepository {
 	 *            記事のID
 	 */
 	public void deleteById(Integer id) {
+		System.out.println(id);
 		String sql = "DELETE FROM articles WHERE id = :id ";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		template.update(sql, param);

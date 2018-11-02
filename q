@@ -1,0 +1,25 @@
+ 掲示板アプリの作成（deleteByIdメソッドが未完成）
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+# Your branch is up to date with 'origin/master'.
+#
+# Changes to be committed:
+#	new file:   .gitignore
+#	new file:   .mvn/wrapper/maven-wrapper.jar
+#	new file:   .mvn/wrapper/maven-wrapper.properties
+#	new file:   mvnw
+#	new file:   mvnw.cmd
+#	new file:   pom.xml
+#	new file:   src/main/java/practice/JavaBulletinBoardApplication.java
+#	new file:   src/main/java/practice/controller/ArticleController.java
+#	new file:   src/main/java/practice/domain/Article.java
+#	new file:   src/main/java/practice/domain/Comment.java
+#	new file:   src/main/java/practice/form/ArticleForm.java
+#	new file:   src/main/java/practice/repository/ArticleRepository.java
+#	new file:   src/main/java/practice/repository/CommentRepository.java
+#	new file:   src/main/resources/application.yml
+#	new file:   src/main/webapp/WEB-INF/views/PutArticle.jsp
+#	new file:   src/test/java/practice/JavaBulletinBoardApplicationTests.java
+#
