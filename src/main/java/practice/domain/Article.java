@@ -15,15 +15,15 @@ public class Article {
 	private String name;
 	/** 記事内容 */
 	private String content;
-	/**コメントのリスト*/
-	private List<Comment>commentList;
+	/** コメントのリスト */
+	private List<Comment> commentList;
 
-	public Article() {
-		id = 0;
-		name = null;
-		content = null;
-		commentList = null;
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", name=" + name + ", content=" + content + ", commentList=" + commentList + "]";
 	}
+
+	public Article() {}
 
 	public Article(Integer id, String name, String content, List<Comment> commentList) {
 		super();
@@ -31,11 +31,6 @@ public class Article {
 		this.name = name;
 		this.content = content;
 		this.commentList = commentList;
-	}
-
-	@Override
-	public String toString() {
-		return "Article [id=" + id + ", name=" + name + ", content=" + content + ", commentList=" + commentList + "]";
 	}
 
 	public Integer getId() {
@@ -69,6 +64,5 @@ public class Article {
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
 	}
-	
-}
 
+}

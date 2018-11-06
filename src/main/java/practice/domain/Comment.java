@@ -17,23 +17,19 @@ public class Comment {
 	private Integer articleId;
 
 	public Comment() {
-		id = 0;
-		name = null;
-		content = null;
-		articleId = 0;
 	}
 
-	public Comment(Integer id, String name, String content, Integer articleID) {
+	public Comment(Integer id, String name, String content, Integer articleId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.content = content;
-		this.articleId = articleID;
+		this.articleId = articleId;
 	}
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", name=" + name + ", content=" + content + ", articleID=" + articleId + "]";
+		return "Comment [id=" + id + ", name=" + name + ", content=" + content + ", articleId=" + articleId + "]";
 	}
 
 	public Integer getId() {

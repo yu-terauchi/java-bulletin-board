@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,17 +12,18 @@
 <body>
  <h2>掲示板アプリケーション</h2>
 <!-- 	記事内容入力フォーム	 -->
- 	<form action="${pageContext.request.contextPath}/article/insertArticle" method="POST">
+ 	<form:form modelAttribute="articleForm" action="${pageContext.request.contextPath}/article/insertArticle" method="POST">
+ 		<form:errors path="name" cssStyle="color:red" element="div"/>
  		<label for="name">投稿者名：</label>
- 		<input type="text" name="name" id="name"><br>
+ 		<form:input path="name" id="name"/><br>
  	
+ 	 	<form:errors path="content" cssStyle="color:red" element="div"/>
  		<label for="content">投稿内容：</label>
- 		<textarea name="content" id="content"></textarea><br>
+ 		<form:textarea path="content" id="content"/><br>
  	
  		<input type="submit" value="記事投稿"> 
-	 </form>
+	 </form:form>
 	 
-	 	 <hr>
 <!--	投稿内容を表示	 -->
 	 <c:forEach var="article" items="${articleList}">
 	 	<hr>
@@ -51,17 +51,21 @@
 	 				<c:out value="${comment.content}"></c:out></p>
 	 		</c:forEach>
 <!--	コメント入力フォーム 	-->
-	 		<form action="${pageContext.request.contextPath}/article/insertComment"  method="POST">
-	 			<input type="hidden" name="articleId" value="${article.id}">
-	 			
+	 		<form:form modelAttribute="commentForm" action="${pageContext.request.contextPath}/article/insertComment"  method="POST">
+	 			<form:hidden path="articleId" value="${article.id}" />
+	 			<c:if test="${article.id == commentForm.articleId}">
+	 			<form:errors path="name" cssStyle="color:red" element="div"/>
+	 			</c:if>
 	 			<label for="name">名前：</label>
- 				<input type="text" name="name" id="name"><br>
- 	
+ 				<form:input path="name" id="name"/><br>
+ 				
+ 				<c:if test="${article.id}==${commentForm.articleId}">
+	 			<form:errors path="content" cssStyle="color:red" element="div"/></c:if>
  				<label for="content">コメント：</label>
- 				<textarea name="content" id="content"></textarea><br>
+ 				<form:textarea path="content" id="content"/><br>
  	
  				<input type="submit" value="コメントを投稿"> 
-	 		</form>
+	 		</form:form>
 	 	
 	 </c:forEach>
 	 
