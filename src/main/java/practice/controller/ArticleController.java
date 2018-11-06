@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import practice.domain.Article;
 import practice.domain.Comment;
@@ -41,6 +40,7 @@ public class ArticleController {
 	public ArticleForm setUpForm() {
 		return new ArticleForm();
 	}
+
 	@ModelAttribute
 	public CommentForm setUpForm2() {
 		return new CommentForm();
@@ -58,39 +58,45 @@ public class ArticleController {
 	@RequestMapping("/index")
 	public String index(Model model) {
 		List<Article> articleList = articleRepository.findAllver2();
-		// for(Article article :articleList) {//articleの中のidを使ってcommentListを取ってくる
-		// List<Comment> commentList =
-		// commentRepository.findByArticleId(article.getId());
-		// article.setCommentList(commentList);
-		// }
-
 		model.addAttribute("articleList", articleList);
-
 		System.out.println("掲示板へ飛びます");
 		return "/PutArticle";
 	}
 
+	// @RequestMapping("/index")
+	// public String index(Model model) {
+	// List<Article> articleList = articleRepository.findAll();
+	// for (Article article : articleList) {
+	// List<Comment> commentList =
+	// commentRepository.findByArticleId(article.getId());
+	// article.setCommentList(commentList);
+	// }
+	// model.addAttribute("articleList", articleList);
+	// return "/PutArticle";
+	// }
+
+	
 	/**
-	 * 掲示板に記事を投稿するメソッド.
+	 * 記事を投稿するメソッド
 	 * 
-	 * @param name
-	 *            記事の投稿者名
-	 * @param content
-	 *            記事内容
-	 * @return 記事が投稿された掲示板画面
+	 * @param articleForm
+	 * @param result
+	 * @param redirectAttributes
+	 * @param model
+	 * @return
 	 */
 	@RequestMapping("/insertArticle")
 	public String insertArticle(@Validated ArticleForm articleForm, BindingResult result,
-			RedirectAttributes redirectAttributes, Model model) {
+			 Model model) {
 		if (result.hasErrors()) {
-			return index(model);//index()メソッドを呼んで引数にmodelを渡してあげることでリクエストスコ―プを指定することができるので最初のindexメソッドの中身の処理を再現できる
+			return index(model);// index()メソッドを呼んで引数にmodelを渡してあげることでリクエストスコ―プを指定することができるので最初のindexメソッドの中身の処理を再現できる
 		}
 		Article article = new Article();
 
-		//articleFormの中身をarticleオブジェクトにコピー
+		// articleFormの中身をarticleオブジェクトにコピー
 		BeanUtils.copyProperties(articleForm, article);
 
-		//リポジトリにはformではなくドメインに詰めて送る
+		// リポジトリにはformではなくドメインに詰めて送る
 		articleRepository.insert(article);
 
 		return "redirect:/article/index"; // redirect:を付けることで2重送信防止
@@ -107,11 +113,18 @@ public class ArticleController {
 	 *            コメントを投稿する記事のID
 	 * @return 記事に対するコメントを追加した掲示板画面
 	 */
+	/**
+	 * 記事にコメントを追加するメソッド.
+	 * 
+	 * @param commentForm　コメント者名とコメント内容の情報を持つ
+	 * @param commentResult	リザルト
+	 * @param model	モデル
+	 * @return
+	 */
 	@RequestMapping("/insertComment")
 	public String insertComment(@Validated CommentForm commentForm, BindingResult commentResult,
-			RedirectAttributes redirectAttributes, Model model) {
-		
-		
+			Model model) {
+
 		if (commentResult.hasErrors()) {
 			return index(model);
 		}

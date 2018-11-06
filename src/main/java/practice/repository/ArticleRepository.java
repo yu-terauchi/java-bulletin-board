@@ -57,12 +57,13 @@ public class ArticleRepository {
 
 				commentList = new ArrayList<Comment>();
 				article.setCommentList(commentList);
-			}
+				// articleオブジェクトに情報を詰めてArticle型のlistにadd
+				articleList.add(article);
+			}//articleListにaddするのが一行違うだけでバグが発生するよ
+			//試しにif分の外に出してみよう！
 
-			// articleオブジェクトに情報を詰めてArticle型のlistにadd
-			articleList.add(article);
 			// while文の直下にコメントオブジェクトを作ってコメントの情報をつて詰めてcommentListにaddする
-			// articleがないと新しいcom_idは自動生成されない（＝0）
+			// コメントがないと新しいcom_idは自動生成されない（＝0）
 			// 逆説的に言うと、何もコメントしてないときにコメントIDが0,nameとcontentがnullで表示されるなら
 			// コメントIDが0の場合はコメントリストに0,nullをセットしてaddしないように条件を付ければよい
 			int comId = rs.getInt("com_id");
@@ -75,7 +76,8 @@ public class ArticleRepository {
 				commentList.add(comment);
 			}
 			// nextする前の記事のidをpreviousArticleIdに保管しておく
-			previousArticleId = article.getId();
+			previousArticleId = nowArticleId;
+//			previousArticleId = article.getId();
 			// nextしてwhile文内をループします
 		}
 		return articleList;

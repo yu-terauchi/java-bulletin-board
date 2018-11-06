@@ -59,8 +59,9 @@
 	 			<label for="name">名前：</label>
  				<form:input path="name" id="name"/><br>
  				
- 				<c:if test="${article.id}==${commentForm.articleId}">
-	 			<form:errors path="content" cssStyle="color:red" element="div"/></c:if>
+ 				<c:if test="${article.id == commentForm.articleId}">
+	 			<form:errors path="content" cssStyle="color:red" element="div"/>
+	 			</c:if>
  				<label for="content">コメント：</label>
  				<form:textarea path="content" id="content"/><br>
  	
